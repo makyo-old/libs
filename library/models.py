@@ -7,9 +7,10 @@ class Library(models.Model):
     long_desc = models.TextField()
     url = models.URLField(verify_exists = False)
     current_version = models.CharField(max_length = 20)
-    mime_type = models.CharField(max_length = 50)
+    mimetype = models.CharField(max_length = 50)
 
 class Version(models.Model):
+    library = models.ForeignKey("Library")
     version = models.CharField(max_length = 20)
     data = models.TextField()
     compressed = models.BooleanField(default = True)
