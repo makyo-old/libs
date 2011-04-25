@@ -1,4 +1,4 @@
-from libs.library.models import *
+from jnsqlibs.library.models import *
 from django.shortcuts import get_object_or_404, render_to_response
 from django.http import HttpResponse
 
