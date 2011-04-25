@@ -3,5 +3,13 @@
 {% block title %}{{ library.name }}{% endblock %}
 
 {% block content %}
-Show library
+<h2>{{ library.name }}</h2>
+<p class="shortdesc">{{ library.short_desc }}</p>
+<p class="longdesc">{{ library.long_desc }}</p>
+<h3>Versions</h3>
+<ul>
+    {% for version in library.version_set.all %}
+    <li class="{% cycle "odd" "even" %}{% if version.version == library.current_version %} current{% endif %}"><a href="{{ version.get_absolute_url }}">{{ version.version }}</a>{% if version.dependencies.count > 0 %} <em>(Depends on: {% for dependency in version.dependencies.all %}<a href="{{ dependency.library.get_absolute_url }}">{{ dependency.library.name }}</a> {{ dependency.min_version }}{% if forloop.last %}{% else %}, {% endif %}{% endfor %}){% endif %}</li>
+    {% endfor %}
+</ul>
 {% endblock %}

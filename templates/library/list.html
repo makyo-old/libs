@@ -3,5 +3,10 @@
 {% block title %}Libraries List{% endblock %}
 
 {% block content %}
-List libraries
+<ul>
+    {% for library in libraries.all %}
+    <li class="{% cycle "odd" "even" %}"><a href="{{ library.get_absolute_url }}">{{ library.name }}</a> - <em>{{ library.version_set.count }} version{% if library.version_set.count > 1 or library.version_set.count == 0 %}s{% endif %}</em><div class="hide">
+    {{ library.short_desc }}</div></li>
+    {% endfor %}
+</ul>
 {% endblock %}

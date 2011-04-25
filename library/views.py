@@ -12,6 +12,6 @@ def show_library(request, library):
 
 def use_library(request, library, version = None):
     l = get_object_or_404(Library, slug = library)
-    version is None and version = l.current_version
+    version = (version is None and l.current_version or version)
     v = l.version_set.get(version__exact = version)
     return HttpResponse(v.data, mimetype = l.mimetype)
