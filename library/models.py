@@ -34,6 +34,9 @@ class Version(models.Model):
     def __unicode__(self):
         return "%s: version %s" % (self.library.name, self.version)
 
+    class Meta:
+        ordering = ['-id']
+
 class Dependency(models.Model):
     library = models.ForeignKey("Library")
     min_version = models.CharField(max_length = 20)
